@@ -1,0 +1,93 @@
+apiVersion: v1
+items:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: qotd-csharp
+      app.kubernetes.io/component: qotd-csharp
+      app.kubernetes.io/instance: qotd-csharp
+      book: chapter07
+    name: qotd-csharp
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        openshift.io/imported-from: quay.io/donschenck/qotd-csharp:openshiftfordotnetdevelopers
+      from:
+        kind: DockerImage
+        name: quay.io/donschenck/qotd-csharp:openshiftfordotnetdevelopers
+      generation: null
+      importPolicy:
+        importMode: Legacy
+      name: openshiftfordotnetdevelopers
+      referencePolicy:
+        type: ""
+  status:
+    dockerImageRepository: ""
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"qotd-csharp:openshiftfordotnetdevelopers"},"fieldPath":"spec.template.spec.containers[?(@.name==\"qotd-csharp\")].image"}]'
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: qotd-csharp
+      app.kubernetes.io/component: qotd-csharp
+      app.kubernetes.io/instance: qotd-csharp
+      book: chapter07
+    name: qotd-csharp
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        book: chapter07
+        deployment: qotd-csharp
+    strategy: {}
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftNewApp
+        creationTimestamp: null
+        labels:
+          book: chapter07
+          deployment: qotd-csharp
+      spec:
+        containers:
+        - image: ' '
+          name: qotd-csharp
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: qotd-csharp
+      app.kubernetes.io/component: qotd-csharp
+      app.kubernetes.io/instance: qotd-csharp
+      book: chapter07
+    name: qotd-csharp
+  spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      book: chapter07
+      deployment: qotd-csharp
+  status:
+    loadBalancer: {}
+kind: List
+metadata: {}

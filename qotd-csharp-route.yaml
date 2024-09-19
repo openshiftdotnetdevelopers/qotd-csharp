@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: qotd-csharp
+    app.kubernetes.io/component: qotd-csharp
+    app.kubernetes.io/instance: qotd-csharp
+    book: chapter07
+  name: qotd-csharp
+spec:
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  to:
+    kind: ""
+    name: qotd-csharp
+    weight: null
+status: {}
