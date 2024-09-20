@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/dotnet-80 AS base
 WORKDIR /opt/app-root/app
 # EXPOSE 80
 # EXPOSE 443
-EXPOSE 5000
+EXPOSE 8080
 
 FROM registry.access.redhat.com/ubi8/dotnet-80 AS build
 WORKDIR /opt/app-root/src
