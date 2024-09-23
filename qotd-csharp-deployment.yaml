@@ -80,10 +80,10 @@ items:
     name: qotd-csharp
   spec:
     ports:
-    - name: 8080-tcp
-      port: 8080
+    - name: 5000-tcp
+      port: 5000
       protocol: TCP
-      targetPort: 8080
+      targetPort: 5000
     selector:
       book: chapter07
       deployment: qotd-csharp

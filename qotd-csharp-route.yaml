@@ -10,7 +10,7 @@ metadata:
   name: qotd-csharp
 spec:
   port:
-    targetPort: 8080
+    targetPort: 5000
   tls:
     termination: edge
   to:
